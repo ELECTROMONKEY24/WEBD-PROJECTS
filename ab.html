@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Blog</title>
+  <style>
+    /* ... (previous CSS styles) ... */
+    body {
+        background-image: url('C:\Users\yssmc\OneDrive\Desktop');
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        background-color: #333;
+        color: #fff; /* Change the text color to white */
+        padding: 20px;
+        text-align: center;
+        /* Add flexbox properties for centering */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 36px;
+    }
+
+    .blog-container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    .blog {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .blog:hover {
+      background-color: #f5f5f5;
+    }
+
+    .blog h2 {
+      margin-top: 0;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .blog .meta {
+      color: #888;
+      font-size: 14px;
+    }
+
+    .blog img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 10px;
+      display: block;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .comments {
+      margin-top: 20px;
+      border-top: 1px solid #ccc;
+      padding-top: 20px;
+      padding: 20px;
+        /* Add a box-shadow to give depth to the comments section */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        /* Add a border radius to the comments section */
+        border-radius: 8px;
+    }
+
+    .comments h3 {
+      margin-bottom: 10px;
+    }
+
+    .comments form {
+      margin-top: 10px;
+        /* Add padding to the form fields */
+        padding: 10px;
+        /* Add a border radius to the form */
+        border-radius: 8px;
+        /* Add a box-shadow to give depth to the form */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .comments ul {
+        /* Add padding to the comments list */
+        padding: 0;
+        /* Remove default list styling */
+        list-style: none;
+    }
+    .comments li {
+        /* Add margin between comments */
+        margin-bottom: 10px;
+        /* Add a box-shadow to give depth to the comments */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        /* Add padding to the comments */
+        padding: 10px;
+        /* Add a border radius to the comments */
+        border-radius: 8px;
+        /* Add a background color to the comments */
+        background-color: #f5f5f5;
+}
+
+    .comments label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .comments input[type="text"],
+    .comments textarea {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .comments button[type="submit"] {
+      background-color: #333;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+      background: linear-gradient(to right, #333, #555);
+    }
+
+    .comments button[type="submit"]:hover {
+      background-color: #555;
+    }
+
+    #blogContent {
+      display: none;
+      margin: 20px auto;
+      max-width: 800px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .share-buttons {
+      margin-top: 20px;
+    }
+    .share-buttons a {
+      margin-right: 10px;
+        /* Add padding to the share buttons */
+        padding: 8px;
+        /* Add a border radius to the share buttons */
+        border-radius: 50%;
+        /* Add a gradient background to the share buttons */
+        background: linear-gradient(to right, #007bff, #0056b3);
+    }
+    .share-buttons a:hover {
+        /* Add a background color to highlight the active button */
+        background-color: #0056b3;
+        /* Add a box-shadow to the share buttons on hover */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .search-container {
+      text-align: center;
+      margin-bottom: 20px;
+        /* Add padding to the search container */
+        padding: 20px;
+        /* Add a box-shadow to give depth to the search container */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        /* Add a border radius to the search container */
+        border-radius: 8px;
+    }
+    .search-input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 70%;
+      max-width: 400px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #007bff;
+      border-color: #007bff;
+        /* Add a box-shadow on focus */
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    .search-button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      background: linear-gradient(to right, #007bff, #0056b3);
+    }
+
+    .search-button:hover {
+      background-color: #0056b3;
+    }
+    .menu {
+      background-color: #333;
+      padding: 10px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .menu a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 5px 10px;
+    }
+
+    .menu a:hover {
+      background-color: #555;
+      background-color: #444;
+    }
+
+    .like-dislike {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .like-button,
+    .dislike-button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+      background-color: #0056b3;
+    }
+
+    .like-button:hover,
+    .dislike-button:hover {
+      background-color: #0056b3;
+    }
+
+    .like-count,
+    .dislike-count {
+      font-size: 14px;
+    }
+    .feedback-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    }
+
+    .feedback-form h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    }
+
+    .feedback-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #555;
+    }
+
+    .feedback-form input[type="text"],
+    .feedback-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    }
+
+    .feedback-form textarea {
+    resize: vertical;
+    min-height: 100px;
+    }
+
+    .feedback-form button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    }
+
+    .feedback-form button[type="submit"]:hover {
+    background-color: #0056b3;
+    }
+
+    .feedback-form button[type="submit"]:focus {
+    outline: none;
+    }
+
+    .feedback-form .success-message {
+    color: #007bff;
+    font-size: 16px;
+    margin-top: 10px;
+    }
+
+    .feedback-form .error-message {
+    color: #ff0000;
+    font-size: 16px;
+    margin-top: 10px;
+    }
+    .follow-us {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .follow-us h2 {
+    margin-bottom: 10px;
+  }
+
+  .instagram-icon {
+    width: 50px; /* Adjust the size as needed */
+    height: 50px; /* Adjust the size as needed */
+    border-radius: 50%; /* To make the icon circular */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Add more styling as desired (e.g., border, background color, etc.) */
+  }
+  </style>
+</head>
+<body>
+  <!-- ... (previous HTML content) ... -->
+  <header>
+    <h1>KMITRA</h1>
+  </header>
+  
+  <div class="menu">
+    <a href="#" onclick="showHomepage()">Homepage</a>
+    <a href="#" onclick="showAboutUs()">About Us</a>
+    <a href="#" onclick="showFeedback()">Feedback</a>
+    <a href="#" onclick="showContactUs()">Contact Us</a>
+  </div>
+
+  <div class="search-container">
+    <input type="text" class="search-input" id="searchInput" placeholder="Search for blogs...">
+    <button onclick="searchBlogs()">Search</button>
+  </div>
+
+  <div class="blog-container" id="blogContainer">
+    <!-- Blogs will be dynamically added here -->
+  </div>
+  <!-- ... (previous HTML content) ... -->
+
+<!-- Follow Us on Instagram section -->
+<div id="instagramSection" style="display: none;">
+    <div class="follow-us">
+      <h2>Follow Us on Instagram</h2>
+      <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+        <img src="path-to-your-instagram-icon.png" alt="Instagram Icon" class="instagram-icon">
+      </a>
+    </div>
+  </div>
+  
+  <!-- ... (previous HTML content) ... -->
+  
+
+
+  <div id="blogContent">
+    <!-- ... (previous content) ... -->
+    <h2 id="blogTitle"></h2>
+    <div id="blogMeta"></div>
+    <img id="blogImage" src="" alt="">
+    <p id="blogText"></p>
+    <div class="like-dislike">
+        <button class="like-button" onclick="likeBlog()">Like</button>
+        <button class="dislike-button" onclick="dislikeBlog()">Dislike</button>
+        <div class="like-count" id="likeCount">Likes: 0</div>
+        <div class="dislike-count" id="dislikeCount">Dislikes: 0</div>
+      </div>
+    <div class="comments" id="commentsSection">
+      <h3>Comments:</h3>
+      <ul id="commentsList"></ul>
+      <form onsubmit="addComment(event)">
+        <label for="commentAuthor">Your Name:</label>
+        <input type="text" id="commentAuthor" required><br>
+        <label for="commentContent">Your Comment:</label><br>
+        <textarea id="commentContent" required></textarea><br>
+        <button type="submit">Add Comment</button>
+      </form>
+    <div class="share-buttons">
+      <!-- Share links for various platforms -->
+      <a href="whatsapp://send?text=Check%20out%20this%20blog:%20My%20Blog%20-%20${encodeURIComponent(blog.title)}%0A%0A${encodeURIComponent(blog.content)}" target="_blank" rel="noopener noreferrer">Share on WhatsApp</a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}" target="_blank" rel="noopener noreferrer">Share on Facebook</a>
+      <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out this blog: My Blog - ${blog.title}`)}&url=${encodeURIComponent(window.location.href)}" target="_blank" rel="noopener noreferrer">Share on Twitter</a>
+      <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Share on Instagram</a>
+    </div>
+  </div>
+
+  <script>
+    // ... (previous JavaScript code) ...
+    const blogsData = [
+      {
+        title: "Blog Post 1",
+        author: "John Doe",
+        date: "2023-07-26",
+        image: "https://via.placeholder.com/300",
+        content: "This is the content of Blog Post 1.",
+        comments: [],
+        likes: 0,
+        dislikes: 0
+      },
+      {
+        title: "Blog Post 2",
+        author: "Jane Smith",
+        date: "2023-07-27",
+        image: "https://via.placeholder.com/300",
+        content: "This is the content of Blog Post 2.",
+        comments: [],
+        likes: 0,
+        dislikes: 0
+      }
+      // Add more blog entries here...
+    ];
+
+    // Function to display blogs on the homepage
+    function displayBlogs(blogs) {
+      const blogContainer = document.getElementById("blogContainer");
+      blogContainer.innerHTML = '';
+
+      // Sort blogs by date in descending order
+      blogs.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      blogs.forEach((blog, index) => {
+        const blogElement = document.createElement('div');
+        blogElement.classList.add('blog');
+        blogElement.innerHTML = `
+          <h2>${blog.title}</h2>
+          <div class="meta">By ${blog.author} | ${blog.date}</div>
+          <img src="${blog.image}" alt="${blog.title}">
+        `;
+        blogElement.addEventListener('click', () => viewBlog(index));
+        blogContainer.appendChild(blogElement);
+      });
+      const instagramSection = document.getElementById("instagramSection");
+        instagramSection.style.display = "block";
+    }
+
+    // Function to view the full blog content when clicked
+    function viewBlog(index) {
+      const blog = blogsData[index];
+      document.getElementById("blogTitle").innerText = blog.title;
+      document.getElementById("blogMeta").innerText = `By ${blog.author} | ${blog.date}`;
+      document.getElementById("blogImage").src = blog.image;
+      document.getElementById("blogText").innerText = blog.content;
+
+      // Display comments
+      const commentsList = document.getElementById("commentsList");
+      commentsList.innerHTML = '';
+      blog.comments.forEach(comment => {
+        const commentElement = document.createElement('li');
+        commentElement.innerHTML = `<strong>${comment.author}:</strong> ${comment.content}`;
+        commentsList.appendChild(commentElement);
+      });
+
+      // Show the full blog content and hide the homepage blogs
+      document.getElementById("blogContainer").style.display = "none";
+      document.getElementById("blogContent").style.display = "block";
+    }
+
+    // Function to go back to the homepage from the full blog view
+    function goBack() {
+      document.getElementById("blogContainer").style.display = "block";
+      document.getElementById("blogContent").style.display = "none";
+    }
+
+    // Function to add a new comment
+    function addComment(event) {
+      event.preventDefault();
+      const commentAuthor = document.getElementById("commentAuthor").value;
+      const commentContent = document.getElementById("commentContent").value;
+
+      if (commentAuthor && commentContent) {
+        const newComment = {
+          author: commentAuthor,
+          content: commentContent
+        };
+
+        const currentBlog = blogsData.find(blog => blog.title === document.getElementById("blogTitle").innerText);
+        currentBlog.comments.push(newComment);
+
+        // Refresh the comments section
+        viewBlog(blogsData.indexOf(currentBlog));
+
+        // Save the updated data in the JSON file
+        // You may use AJAX or fetch() to send the data to the server and update the JSON file.
+        // For simplicity, we'll use localStorage here (but it won't persist after refreshing the page).
+        localStorage.setItem('blogsData', JSON.stringify(blogsData));
+      }
+    }
+
+    // Call the displayBlogs function to show blogs on the homepage
+    displayBlogs(blogsData);
+        // Function to search for blogs
+        function searchBlogs() {
+      const searchQuery = document.getElementById("searchInput").value.toLowerCase();
+      const matchedBlog = blogsData.find(blog => blog.title.toLowerCase().includes(searchQuery) || blog.content.toLowerCase().includes(searchQuery));
+      
+      if (matchedBlog) {
+        viewBlog(blogsData.indexOf(matchedBlog));
+      } else {
+        alert("No matching blog found.");
+      }
+    }
+    // Function to show the homepage
+    function showHomepage() {
+      document.getElementById("blogContainer").style.display = "block";
+      document.getElementById("blogContent").style.display = "none";
+    }
+
+    // Function to show the about us page (you can implement the actual page content)
+    function showAboutUs() {
+      const blogContent = document.getElementById("blogContent");
+        blogContent.innerHTML = `<h2>About Us</h2>
+            <p>This website is endorsed by KMIT.</p>`;
+        // Hide the homepage and show the "About Us" page
+        document.getElementById("blogContainer").style.display = "none";
+        document.getElementById("blogContent").style.display = "block";
+        const instagramSection = document.getElementById("instagramSection");
+  instagramSection.style.display = "none";
+    }
+
+    // Function to handle the like button click
+    function likeBlog() {
+      const blogTitle = document.getElementById("blogTitle").innerText;
+      const currentBlog = blogsData.find(blog => blog.title === blogTitle);
+      currentBlog.likes += 1;
+      document.getElementById("likeCount").innerText = `Likes: ${currentBlog.likes}`;
+    }
+
+    // Function to handle the dislike button click
+    function dislikeBlog() {
+      const blogTitle = document.getElementById("blogTitle").innerText;
+      const currentBlog = blogsData.find(blog => blog.title === blogTitle);
+      currentBlog.dislikes += 1;
+      document.getElementById("dislikeCount").innerText = `Dislikes: ${currentBlog.dislikes}`;
+    }
+
+    function showContactUs() {
+    const blogContent = document.getElementById("blogContent");
+        blogContent.innerHTML = `<h2>Contact Us</h2>
+            <p>Contact KMITRA for details of the phone number: <strong>12345677994</strong></p>`;
+        // Hide the homepage and show the "Contact Us" page
+        document.getElementById("blogContainer").style.display = "none";
+        document.getElementById("blogContent").style.display = "block";
+        const instagramSection = document.getElementById("instagramSection");
+  instagramSection.style.display = "none";
+    }
+    function showFeedback() {
+  const blogContent = document.getElementById("blogContent");
+  blogContent.innerHTML = `<h2>Feedback</h2>
+    <form onsubmit="submitFeedback(event)">
+      <label for="feedbackName">Your Name:</label>
+      <input type="text" id="feedbackName" required><br>
+      <label for="feedbackMessage">Your Feedback:</label><br>
+      <textarea id="feedbackMessage" required></textarea><br>
+      <button type="submit">Submit Feedback</button>
+    </form>`;
+  // Hide the homepage and show the "Feedback" form
+  document.getElementById("blogContainer").style.display = "none";
+  document.getElementById("blogContent").style.display = "block";
+  const instagramSection = document.getElementById("instagramSection");
+  instagramSection.style.display = "none";
+}
+
+function submitFeedback(event) {
+  event.preventDefault();
+  const feedbackName = document.getElementById("feedbackName").value;
+  const feedbackMessage = document.getElementById("feedbackMessage").value;
+
+  // You can handle the submitted feedback data here (e.g., send it to a server or save it locally).
+  // For simplicity, let's just display an alert with the collected data.
+  alert(`Thank you for your feedback, ${feedbackName}! Your message: ${feedbackMessage}`);
+
+  // Show the homepage after submitting the feedback
+  showHomepage();
+}
+
+
+  </script>
+</body>
+</html>
